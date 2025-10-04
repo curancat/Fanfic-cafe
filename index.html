@@ -584,7 +584,7 @@
                     <p id="minha-descricao" style="max-width: 100%; word-wrap: break-word; font-style: italic;"></p>
                     <p>Avaliação Média: <span id="minha-media-estrelas" class="estrela"></span></p>
                 </div>
-                <button onclick="togglePopup('editar-perfil-popup', true)"><i class="fas fa-edit"></i> Editar Perfil</button>
+                <button onclick="prepararEdicaoPerfil()"><i class="fas fa-edit"></i> Editar Perfil</button>
                 
                 <h3 style="margin-top: 30px;">Minhas Histórias</h3>
                 <div id="minhas-historias-container">
@@ -932,6 +932,18 @@ const firebaseConfig = {
                  togglePopup('perfil-pessoal-popup');
             } catch (error) {
                 alert('Erro ao salvar o perfil: ' + error.message);
+            }
+        }
+        window.prepararEdicaoPerfil = () => {
+            if (window.perfilLogado) {
+                 // 1. Popula os campos com os dados atuais para evitar submeter vazio
+                 document.getElementById('edit-nome').value = window.perfilLogado.nome || '';
+                 document.getElementById('edit-foto').value = window.perfilLogado.fotoUrl || '';
+                 document.getElementById('edit-descricao').value = window.perfilLogado.descricao || '';
+                 // 2. Abre o popup de edição, fechando outros
+                 togglePopup('editar-perfil-popup', true);
+            } else {
+                 alert('O seu perfil ainda não foi carregado. Tente fazer login novamente.');
             }
         }
         window.verPerfilPublico = async (uid) => {
