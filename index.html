@@ -585,7 +585,6 @@
                     <p>Avaliação Média: <span id="minha-media-estrelas" class="estrela"></span></p>
                 </div>
                 <button onclick="prepararEdicaoPerfil()"><i class="fas fa-edit"></i> Editar Perfil</button>
-                
                 <h3 style="margin-top: 30px;">Minhas Histórias</h3>
                 <div id="minhas-historias-container">
                 </div>
@@ -928,10 +927,13 @@ const firebaseConfig = {
                     descricao: novaDescricao.substring(0, 300)
                  });
                  alert('Perfil atualizado com sucesso!');
-                 fecharPopup('editar-perfil-popup');
+                 fecharPopup('editar-perfil-popup'); 
                  togglePopup('perfil-pessoal-popup');
             } catch (error) {
                 alert('Erro ao salvar o perfil: ' + error.message);
+                
+                // NOVO: Adicione esta linha para fechar o popup mesmo com erro
+                fecharPopup('editar-perfil-popup'); 
             }
         }
         window.prepararEdicaoPerfil = () => {
